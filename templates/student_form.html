@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Enter Student Details</h1>
+  <form method="POST" style="max-width: 500px; margin: 0 auto;">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/smoothness/jquery-ui.css">
+    <script>
+      $(function() {
+        $("#id_dob").datepicker({dateFormat: 'yy-mm-dd',changeMonth: true,changeYear: true,yearRange: '-100:+10',maxDate: new Date()});
+        
+      });
+    </script>
+    <style>
+      /* style for form label */
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        font-size: 16px;
+        color: #62529c;
+      }
+
+      /* style for form input */
+      input[type=text], input[type=number], input[type=date] {
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        margin-bottom: 20px;
+        font-size: 16px;
+        color: #62529c;
+      }
+
+      /* style for submit button */
+      input[type=submit] {
+        background-color: #62529c;
+        border: none;
+        color: #fff;
+        padding: 15px 30px;
+        text-decoration: none;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 5px;
+      }
+
+      /* style for buttons */
+      .button {
+        background-color: #8b4caf;
+        color: #fff;
+        font-size: 12px;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 5px;
+        margin-left: 10px;
+        margin-right: 10px;
+        cursor: pointer;
+      }
+
+      .button a {
+        text-decoration: none;
+        color: #fff;
+      }
+
+      /* style for form error messages */
+      .errorlist {
+        color: #f00;
+        font-weight: bold;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      /* style for success message */
+      .success-message {
+        color: #00f;
+        font-weight: bold;
+        margin-top: 20px;
+      }
+    </style>
+    <div style="display: flex; justify-content: center;">
+      <input type="submit" value="Submit">
+    </div>
+   
+    <div style="display: flex; justify-content: center;">
+      <button class="button">
+        <a href="{% url 'add_student' %}">Add Another Student</a>
+      </button>
+      <button class="button">
+        <a href="{% url 'student_list' %}">See in Database</a>
+      </button>
+    </div>
+
+    {% if messages %}
+      {% for message in messages %}
+        <p class="success-message">{{ message }}</p>
+      {% endfor %}
+    {% endif %}
+  </form>
+{% endblock %}

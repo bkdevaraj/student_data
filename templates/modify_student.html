@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <div class="container mt-5">
+    <h1 class="text-center mb-5">Modify Student Information</h1>
+    <form method="POST" class="card p-5">
+      {% csrf_token %}
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/smoothness/jquery-ui.css">
+    <script>
+      $(function() {
+        $("#id_dob").datepicker({dateFormat: 'yy-mm-dd',changeMonth: true,changeYear: true,yearRange: '-100:+10',maxDate: new Date()});
+        
+      });
+    </script>
+    <style>
+      /* style for form label */
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        font-size: 16px;
+        color: #62529c;
+      }
+
+      /* style for form input */
+      input[type=text], input[type=number], input[type=date] {
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        margin-bottom: 20px;
+        font-size: 16px;
+        color: #62529c;
+      }
+
+      /* style for submit button */
+      input[type=submit] {
+        background-color: #62529c;
+        border: none;
+        color: #fff;
+        padding: 15px 30px;
+        text-decoration: none;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 5px;
+      }
+
+      /* style for buttons */
+      .button {
+        background-color: #8b4caf;
+        color: #fff;
+        font-size: 12px;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 5px;
+        margin-left: 10px;
+        margin-right: 10px;
+        cursor: pointer;
+      }
+
+      .button a {
+        text-decoration: none;
+        color: #fff;
+      }
+
+      /* style for form error messages */
+      .errorlist {
+        color: #f00;
+        font-weight: bold;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      /* style for success message */
+      .success-message {
+        color: #00f;
+        font-weight: bold;
+        margin-top: 20px;
+      }
+    </style>
+      <input type="hidden" name="student_id" value="{{ student.id }}">
+    
+      <div class="mb-3">
+        <label for="student_name" class="form-label">Student Name:</label>
+        <input type="text" id="student_name" name="student_name" value="{{ student.student_name }}" class="form-control">
+      </div>
+    
+      <div class="mb-3">
+        <label for="father_name" class="form-label">Father Name:</label>
+        <input type="text" id="father_name" name="father_name" value="{{ student.father_name }}" class="form-control">
+      </div>
+    
+      <div class="mb-3">
+        <label for="mother_name" class="form-label">Mother Name:</label>
+        <input type="text" id="mother_name" name="mother_name" value="{{ student.mother_name }}" class="form-control">
+      </div>
+    
+      <div class="mb-3">
+        <label for="student_class" class="form-label">Class:</label>
+        <input type="text" id="student_class" name="student_class" value="{{ student.student_class }}" class="form-control">
+      </div>
+    
+      <div class="mb-3">
+        <label for="dob" class="form-label">Date of Birth:</label>
+        <input type="date" id="dob" name="dob" value="{{ student.dob|date:'Y-m-d' }}" class="form-control">
+      </div>
+    
+      <div class="mb-3">
+        <label for="school_name" class="form-label">School Name:</label>
+        <input type="text" id="school_name" name="school_name" value="{{ student.school_name }}" class="form-control">
+      </div>
+    
+      <div class="mb-3">
+        <label for="student_aadhar" class="form-label">Student Aadhar Number:</label>
+        <input type="text" id="student_aadhar" name="student_aadhar" value="{{ student.student_aadhar }}" class="form-control">
+      </div>
+    
+      <div class="mb-3">
+        <label for="father_aadhar" class="form-label">Father Aadhar Number:</label>
+        <input type="text" id="father_aadhar" name="father_aadhar" value="{{ student.father_aadhar }}" class="form-control">
+      </div>
+    
+      <div class="mb-3">
+        <label for="mother_aadhar" class="form-label">Mother Aadhar Number:</label>
+        <input type="text" id="mother_aadhar" name="mother_aadhar"  value="{{ student.mother_aadhar }}" class="form-control">
+      </div>
+    
+      <div class="mb-3">
+        <label for="mobile_number" class="form-label">Mobile Number:</label>
+        <input type="text" id="mobile_number"  name="mobile_number" value="{{ student.mobile_number  }}" class="form-control">
+      </div>
+      <div class="mb-3">
+        <label for="address" class="form-label">address:</label>
+        <input type="text" id="address"  name="address" value="{{ student.address  }}" class="form-control">
+      </div>
+      <div class="d-grid gap-2">
+        <button type="submit" class="btn btn-primary btn-lg mt-3">Submit</button>
+        <a href="{% url 'student_list' %}" style="text-decoration: none; color: white; background-color: #4CAF50; padding: 4px 8px; font-size: 20px; margin-left: 6px;">Cancel</a>
+      </div>
+    </form>
+  {% endblock %}
