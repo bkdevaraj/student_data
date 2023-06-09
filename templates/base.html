@@ -1,118 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Student Form</title>
-        <style>
-          /* Set font family and default styles for the page */
-          body {
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Form</title>
+    <style>
+        /* Set font family and default styles for the page */
+        body {
             font-family: Arial, Helvetica, sans-serif;
             font-size: 16px;
             line-height: 1.5;
-          }
-        
-          /* Add padding to the main content container */
-          .container {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Add padding to the main content container */
+        .container {
             padding: 20px;
-          }
-        
-          /* Style the search input and button */
-          input[type="text"] {
+        }
+
+        /* Style the search input and button */
+        input[type="text"] {
             padding: 8px;
             border: 1px solid #ccc;
             border-radius: 4px;
             margin-right: 10px;
-          }
-        
-          button[type="submit"] {
+        }
+
+        button[type="submit"] {
             background-color: #4CAF50;
             color: white;
             padding: 8px 16px;
             border: none;
             border-radius: 4px;
             cursor: pointer;
-          }
-        
-          /* Style the table */
-          table {
+        }
+
+        /* Style the table */
+        table {
             border-collapse: collapse;
             width: 100%;
-          }
-        
-          th, td {
+        }
+
+        th, td {
             text-align: left;
             padding: 8px;
             border-bottom: 1px solid #ddd;
-          }
-        
-          th {
+        }
+
+        th {
             background-color: #4CAF50;
             color: white;
-          }
-        
-          tr:nth-child(even) {
+        }
+
+        tr:nth-child(even) {
             background-color: #f2f2f2;
-          }
-        
-          /* Style the modify button */
-          .modify-btn {
+        }
+
+        /* Style the modify button */
+        .modify-btn {
             text-decoration: none;
             color: white;
             background-color: #4CAF50;
             padding: 8px;
             border-radius: 4px;
-          }
-          .menu-icon {
-    display: none;
-}
+        }
 
-.menu {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
+        /* Header styles */
+        header {
+            background-color: #333;
+            padding: 10px;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
 
-.menu li {
-    display: inline-block;
-    margin-right: 10px;
-}
+        .menu {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: flex-end;
+        }
 
-@media screen and (max-width: 600px) {
-    .menu-icon {
-        display: inline-block;
-        cursor: pointer;
-    }
+        .menu li {
+            margin-left: 10px;
+        }
 
-    .menu {
-        display: none;
-    }
+        .menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
 
-    .menu.show {
-        display: block;
-    }
-}
-        </style>
-        
-        
-    </head>
-  <body>
-    <header>
-      <nav>
+        .menu-icon {
+            display: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        @media screen and (max-width: 600px) {
+            .menu {
+                display: none;
+            }
+
+            .menu-icon {
+                display: inline-block;
+            }
+
+            .menu.show {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Main styles */
+        main {
+            padding: 20px;
+        }
+
+        /* Footer styles */
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <nav>
         <input type="checkbox" id="menu-toggle">
         <label for="menu-toggle" class="menu-icon">&#9776;</label>
         <ul class="menu">
-          <li><a href="/">Home</a></li>
-          <li><a href="/about/">About</a></li>
-          <li><a href="/contact/">Contact</a></li>
-        </ul>
-      </nav>
+            <li><a href="/">Home</a></li>
+            <li><a href="/about/">About</a></li>
+            <li><a href="/contact/">Contact</a></li>
+          </ul>
+        </nav>
     </header>
     <main>
-      {% block content %}{% endblock %}
+        {% block content %}{% endblock %}
     </main>
     <footer>
-      &copy; My Website 2023
+        &copy; My Website 2023
     </footer>
-  </body>
-</html>
+    
+    <script>
+        // Toggle the menu on mobile devices
+        const menuToggle = document.getElementById('menu-toggle');
+        const menu = document.querySelector('.menu');
+    
+        menuToggle.addEventListener('change', () => {
+            if (menuToggle.checked) {
+                menu.classList.add('show');
+            } else {
+                menu.classList.remove('show');
+            }
+        });
+    </script>
+    </body>
+    </html>
+    

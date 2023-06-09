@@ -1,22 +1,56 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1 style="text-align: center; margin-top: 30px;">Student Database</h1>
+  <style>
+    .page-title {
+      text-align: center;
+      margin-top: 30px;
+      font-size: 24px;
+    }
 
-  <div style="display: flex; justify-content: center; margin-top: 50px;">
+    .button-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 50px;
+    }
+
+    .action-button {
+      background-color: #4CAF50;
+      color: white;
+      font-size: 16px;
+      padding: 10px 30px;
+      border: none;
+      border-radius: 5px;
+      margin-right: 20px;
+    }
+
+    /* Media Queries */
+    @media only screen and (max-width: 600px) {
+      .page-title {
+        font-size: 20px;
+      }
+
+      .button-container {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .action-button {
+        margin-top: 10px;
+        margin-right: 0;
+      }
+    }
+  </style>
+
+  <h1 class="page-title">Student Database</h1>
+
+  <div class="button-container">
     <a href="{% url 'add_student' %}">
-      <button style="background-color: #4CAF50; color: white; font-size: 16px; padding: 10px 30px; border: none; border-radius: 5px; margin-right: 20px;">
-        Add Another Student
-      </button>
+      <button class="action-button">Add Another Student</button>
     </a>
   
     <a href="{% url 'student_list' %}">
-      <button style="background-color: #4CAF50; color: white; font-size: 16px; padding: 10px 30px; border: none; border-radius: 5px;">
-        Student Database
-      </button>
-      <button style="background-color: #4CAF50; color: white; font-size: 16px; padding: 10px 30px; border: none; border-radius: 5px;">
-        Student Database1
-      </button>
+      <button class="action-button">Student Database</button>
     </a>
   </div>
 
