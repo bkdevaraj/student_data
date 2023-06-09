@@ -148,74 +148,74 @@ def student_list_by_age(request):
 #     print(i,VAL1)
 
 
-import threading
-import time
-from datetime import datetime, timedelta
-from django.conf import settings
-from pytz import timezone
-import os
-import pytz
-
-
 # import threading
 # import time
 # from datetime import datetime, timedelta
 # from django.conf import settings
-# from .models import Student
+# from pytz import timezone
+# import os
+# import pytz
 
-# # set the date and time for the class updates from a configuration file
-# CLASS_UPDATE_HOUR = int(settings.CLASS_UPDATE_HOUR)
-# CLASS_UPDATE_MINUTE = int(settings.CLASS_UPDATE_MINUTE)
-# CLASS_UPDATE_MONTH = int(settings.CLASS_UPDATE_MONTH)
-# CLASS_UPDATE_DAY = int(settings.CLASS_UPDATE_DAY)
 
-# def update_student_class():
-#     now = datetime.now()
-#     if now.month == CLASS_UPDATE_MONTH and now.day == CLASS_UPDATE_DAY and now.hour == CLASS_UPDATE_HOUR and now.minute == CLASS_UPDATE_MINUTE:
-#         students = Student.objects.all()
-#         for student in students:
-#             if student.student_class == '1':
-#                 student.student_class = '2'
-#             elif student.student_class == '2':
-#                 student.student_class = '3'
-#             elif student.student_class == '3':
-#                 student.student_class = '4'
-#             elif student.student_class == '4':
-#                 student.student_class = '5'
-#             elif student.student_class == '5':
-#                 student.student_class = '6'
-#             elif student.student_class == '6':
-#                 student.student_class = '7'
-#             elif student.student_class == '7':
-#                 student.student_class = '8'
-#             elif student.student_class == '8':
-#                 student.student_class = '9'
-#             elif student.student_class == '9':
-#                 student.student_class = '10'
-#             elif student.student_class == '10':
-#                 student.student_class = 'Please Enter as he passed 10th'
-#             elif student.student_class == 'lkg':
-#                 student.student_class = 'ukg'
-#             elif student.student_class == 'ukg':
-#                 student.student_class = '1'
-#             else:
-#                 student.student_class=student.student_class+'+'+'1'
-#             # and so on for the other class updates
-#             student.save()
+# # import threading
+# # import time
+# # from datetime import datetime, timedelta
+# # from django.conf import settings
+# # from .models import Student
 
-# def background_update():
-#     while True:
-#         update_student_class()
-#         time.sleep(60) # wait for one minute before running the function again
+# # # set the date and time for the class updates from a configuration file
+# # CLASS_UPDATE_HOUR = int(settings.CLASS_UPDATE_HOUR)
+# # CLASS_UPDATE_MINUTE = int(settings.CLASS_UPDATE_MINUTE)
+# # CLASS_UPDATE_MONTH = int(settings.CLASS_UPDATE_MONTH)
+# # CLASS_UPDATE_DAY = int(settings.CLASS_UPDATE_DAY)
 
-# if settings.DEBUG:
-#     # run the function once at startup if in debug mode
-#     update_student_class()
-# else:
-#     # start a separate thread to run the function in the background if not in debug mode
-#     t = threading.Thread(target=background_update)
-#     t.daemon = True
-#     t.start()
+# # def update_student_class():
+# #     now = datetime.now()
+# #     if now.month == CLASS_UPDATE_MONTH and now.day == CLASS_UPDATE_DAY and now.hour == CLASS_UPDATE_HOUR and now.minute == CLASS_UPDATE_MINUTE:
+# #         students = Student.objects.all()
+# #         for student in students:
+# #             if student.student_class == '1':
+# #                 student.student_class = '2'
+# #             elif student.student_class == '2':
+# #                 student.student_class = '3'
+# #             elif student.student_class == '3':
+# #                 student.student_class = '4'
+# #             elif student.student_class == '4':
+# #                 student.student_class = '5'
+# #             elif student.student_class == '5':
+# #                 student.student_class = '6'
+# #             elif student.student_class == '6':
+# #                 student.student_class = '7'
+# #             elif student.student_class == '7':
+# #                 student.student_class = '8'
+# #             elif student.student_class == '8':
+# #                 student.student_class = '9'
+# #             elif student.student_class == '9':
+# #                 student.student_class = '10'
+# #             elif student.student_class == '10':
+# #                 student.student_class = 'Please Enter as he passed 10th'
+# #             elif student.student_class == 'lkg':
+# #                 student.student_class = 'ukg'
+# #             elif student.student_class == 'ukg':
+# #                 student.student_class = '1'
+# #             else:
+# #                 student.student_class=student.student_class+'+'+'1'
+# #             # and so on for the other class updates
+# #             student.save()
+
+# # def background_update():
+# #     while True:
+# #         update_student_class()
+# #         time.sleep(60) # wait for one minute before running the function again
+
+# # if settings.DEBUG:
+# #     # run the function once at startup if in debug mode
+# #     update_student_class()
+# # else:
+# #     # start a separate thread to run the function in the background if not in debug mode
+# #     t = threading.Thread(target=background_update)
+# #     t.daemon = True
+# #     t.start()
 
 
 
