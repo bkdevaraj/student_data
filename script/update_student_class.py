@@ -25,7 +25,7 @@ def update_student_class():
     now = datetime.now()
 
     # Check if it's March 21 at 12:18 PM
-    if now.month == 8 and now.day == 2 and now.hour == 16 and now.minute == 0:
+    if now.month == 8 and now.day == 2 and now.hour == 16 and now.minute == 30:
         
         # Update the student class
         students = Student.objects.all()
