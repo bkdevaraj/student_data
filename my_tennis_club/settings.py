@@ -53,12 +53,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'studentsdataform',
+    'login_app',
     'studentsdataform.templatetags.custom_filters',
     'studentsdataform.templatetags.custom_tags',
     'apscheduler',
 
 ]
-
+LOGIN_REDIRECT_URL = 'studentsdataform:home'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

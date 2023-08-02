@@ -45,7 +45,7 @@ def add_student(request):
         if form.is_valid():
             form.save()
            
-            return redirect('student_list')
+            return redirect('studentsdataform:student_list')
             # return redirect('success')
     else:
         form = StudentForm()
@@ -57,6 +57,11 @@ def add_student(request):
 
 
 # GENERATING STUDENTS LIST DATABASE AFTER SAVING TO MODEL
+
+from django.contrib.auth import logout
+def logout_view(request):
+    logout(request)
+    return redirect('login_app:login')  # Redirect back to the login page after logout
 
 
 
@@ -107,7 +112,7 @@ def delete_students(request):
         if student_ids:
             Student.objects.filter(id__in=student_ids).delete()
             
-    return redirect('student_list')
+    return redirect('studentsdataform:student_list')
 
 
 
@@ -122,7 +127,7 @@ def modify_student(request, student_id):
         form = StudentForm(request.POST, instance=student)
         if form.is_valid():
             form.save()
-            return redirect('student_list')
+            return redirect('studentsdataform:student_list')
     else:
         form = StudentForm(instance=student)
 
