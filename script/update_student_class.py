@@ -23,9 +23,9 @@ from studentsdataform.models import Student
 def update_student_class():
     # Get the current date and time
     now = datetime.now()
-
+    print(now)
     # Check if it's March 21 at 12:18 PM
-    if now.month == 8 and now.day == 2 and now.hour == 16 and now.minute == 30:
+    if now.month == 8 and now.day == 5 and now.hour == 15 and now.minute == 50:
         
         # Update the student class
         students = Student.objects.all()
