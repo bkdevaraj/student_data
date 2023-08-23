@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+
     <title>Student Form</title>
     <style>
         /* Set font family and default styles for the page */
@@ -127,7 +130,36 @@
             padding: 10px;
             text-align: center;
         }
+        /* Add animation keyframes for the countdown animation */
+/* Add animation keyframes for the countdown animation */
+@keyframes countdown {
+    from {
+        background: linear-gradient(to right, #00cc00 0%, #00cc00 100%);
+    }
+    to {
+        background: linear-gradient(to right, #ff6666 0%, #ff6666 100%);
+    }
+}
+
+/* Apply the countdown animation to the remaining-time-container */
+#remaining-time-container {
+    animation: countdown linear infinite 120s; /* 2 minutes */
+    background: linear-gradient(to right, #00cc00 0%, #00cc00 100%);
+    display: inline-block;
+    padding: 8px;
+    border-radius: 4px;
+    color: white;
+    margin-left: 10px; /* Add margin for spacing */
+}
+
+
+
     </style>
+    
+    
+        
+   
+    
 </head>
 <body>
 <header>
@@ -135,15 +167,51 @@
         <input type="checkbox" id="menu-toggle">
         <label for="menu-toggle" class="menu-icon">&#9776;</label>
         <ul class="menu">
-            <li><a href="{% url 'studentsdataform:home' %}">Home</a></li>
+            <li><a href="{% url 'studentsdataform:home' %}">&#127968; Home</a></li>
             
-            <li><a href="{% url 'studentsdataform:logout' %}">Logout</a></li>
+                <li><a href="{% url 'studentsdataform:logout' %}">&#128682; Logout</a></li>
+            <li><a <div id="remaining-time-container">
+                Session Timeout: <span id="remaining-time">40:00</span>
+            </div>&#8987;</a></li>
+
           </ul>
+          
         </nav>
+        
     </header>
     <main>
         {% block content %}{% endblock %}
     </main>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const inactivityTimeout = 2400000; // 40 minutes in milliseconds
+            const currentTime = Date.now();
+            const timeout = currentTime + inactivityTimeout;
+
+            function updateRemainingTime() {
+                const remainingTimeInSeconds = Math.ceil((timeout - Date.now()) / 1000);
+                const minutes = Math.floor(remainingTimeInSeconds / 60);
+                const seconds = remainingTimeInSeconds % 60;
+                const remainingTimeElement = document.getElementById('remaining-time');
+
+                if (remainingTimeElement) {
+                    remainingTimeElement.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+                }
+
+                if (remainingTimeInSeconds <= 0) {
+                    // Redirect to the logout URL or perform other actions
+                    console.log("Logging out...");
+                    window.location.href = "{% url 'login_app:logout' %}";
+                }
+            }
+
+            updateRemainingTime(); // Call once initially
+
+            // Call updateRemainingTime every second
+            setInterval(updateRemainingTime, 1000);
+        });
+    </script>
     <footer>
         &copy; My Website 2023
     </footer>
