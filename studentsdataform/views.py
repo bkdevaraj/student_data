@@ -41,10 +41,11 @@ def home(request):
 # ADD STUDENT PAGE AND SAVING THE DATA TO MODEL
 def add_student(request):
     if request.method == 'POST':
-        form = StudentForm(request.POST)
+        form = StudentForm(request.POST,request.FILES)
         if form.is_valid():
-            form.save()
-           
+            student=form.save(commit=False)
+            student.image = request.FILES['image']
+            student.save() 
             return redirect('studentsdataform:student_list')
             # return redirect('success')
     else:
@@ -222,6 +223,23 @@ def student_list_by_age(request):
 # #     t.daemon = True
 # #     t.start()
 
+from django.shortcuts import render, get_object_or_404
+from .models import Student  # You might need to adjust this import based on your project structure
+
+def student_profile_view(request, student_id):
+    student = get_object_or_404(Student, id=student_id)
+    prev_student = Student.objects.filter(id__lt=student_id).last()  # Get the previous student
+    next_student = Student.objects.filter(id__gt=student_id).first()  # Get the next student
+    return render(request, 'student_profile.html', {'student': student,'prev_student': prev_student, 'next_student': next_student})
+
+from django.http import HttpResponse
+def next_student_profile(request, student_id):
+    next_student = Student.objects.filter(id__gt=student_id).order_by('id').first()
+    if next_student:
+        return render(request, 'student_profile.html', {'student': next_student})
+    else:
+        # Handle case where there is no next student
+        return HttpResponse("No next student available")
 
 
 

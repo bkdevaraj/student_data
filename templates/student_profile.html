@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% load custom_filters %}
+{% block content %}
+<div class="page-center">
+  <a href="{% url 'studentsdataform:student_list' %}" class="back-link">&#x2190; BACK </a>
+  <div class="navigation-buttons">
+    {% if prev_student %}
+      <a href="{% url 'studentsdataform:student_profile' prev_student.id %}">
+        <button class="nav-button">Previous</button>
+      </a>
+    {% else %}
+      <button class="nav-button" disabled>Previous</button>
+    {% endif %}
+    {% if next_student %}
+      <a href="{% url 'studentsdataform:student_profile' next_student.id %}">
+        <button class="nav-button">Next</button>
+      </a>
+    {% else %}
+      <button class="nav-button" disabled>Next</button>
+    {% endif %}
+  </div>
+  <div class="profile-details">
+    <h1 class="profile-title">Student Profile</h1>
+    <h3 class="profile-name" style="font-weight: bold; color: #007BFF;">{{ student.student_name }}</h3>
+    <div class="info-section">
+      <p style="font-weight: bold; color: #ac16b9;"> Father's Name: <span style="font-weight: bold; color: #23B916;">{{ student.father_name }}</span></p>
+      <p style="font-weight: bold; color: #ac16b9;"> Mother's Name:<span style="font-weight: bold; color: #23B916;">  {{ student.mother_name }}</span> </p>
+      <p style="font-weight: bold; color: #ac16b9;"> Student Class: <span style="font-weight: bold; color: #23B916;"> {{ student.student_class }}</span> </p>
+      <p style="font-weight: bold; color: #ac16b9;">Student DOB:<span style="font-weight: bold; color: #23B916;">  {{ student.dob }}</span> </p>
+      <p style="font-weight: bold; color: #ac16b9;">Student Age: <span style="font-weight: bold; color: #23B916;"> {{ student.dob|calculate_age }}</span></p>
+      <p style="font-weight: bold; color: #ac16b9;">Student AADHAR:<span style="font-weight: bold; color: #23B916;"> {{ student.student_aadhar }}</span> </p>
+      <p style="font-weight: bold; color: #ac16b9;">Father's AADHAR: <span style="font-weight: bold; color: #23B916;"> {{ student.father_aadhar }}</span> </p>
+      <p style="font-weight: bold; color: #ac16b9;">Mother's AADHAR:<span style="font-weight: bold; color: #23B916;"> {{ student.mother_aadhar }}</span> </p>
+      <p style="font-weight: bold; color: #ac16b9;">Student Mobile Number:<span style="font-weight: bold; color: #23B916;"> {{ student.mobile_number }}</span> </p>
+      <p style="font-weight: bold; color: #ac16b9;">Student Address:<span style="font-weight: bold; color: #23B916;">  {{ student.address }}</span> </p>
+    </div>
+  </div>
+  
+
+  <div class="navigation-buttons">
+    {% if prev_student %}
+      <a href="{% url 'studentsdataform:student_profile' prev_student.id %}">
+        <button class="nav-button">Previous</button>
+      </a>
+    {% else %}
+      <button class="nav-button" disabled>Previous</button>
+    {% endif %}
+    {% if next_student %}
+      <a href="{% url 'studentsdataform:student_profile' next_student.id %}">
+        <button class="nav-button">Next</button>
+      </a>
+    {% else %}
+      <button class="nav-button" disabled>Next</button>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
+.page-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.profile-details {
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.profile-title {
+  font-size: 32px;
+  color: #007bff;
+  margin-bottom: 10px;
+}
+
+.profile-name {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.info-section p {
+  margin: 10px 0;
+}
+
+.info-label {
+  font-weight: bold;
+  color: #007BFF;
+}
+
+/* Navigation buttons style (similar to the previous example) */
+
+
+
+.navigation-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 20px;
+  color: #007bff;
+  text-decoration: none;
+}
+

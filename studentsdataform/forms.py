@@ -17,6 +17,7 @@ class StudentForm(forms.ModelForm):
                        'mobile_number',
                        'dob',
                        'age',
-                       'address'
+                       'address',
+                       'image'
                        ]
     

@@ -16,6 +16,7 @@ class Student(models.Model):
     dob = models.DateField(null=True, blank=True)
     age = models.IntegerField(null=True, blank=True)
     address=models.CharField(max_length=500, default='Unknown')
+    image = models.ImageField(upload_to='assets/img/', blank=True, null=True)
    
     # def save(self, *args, **kwargs):
         
@@ -27,14 +28,6 @@ class Student(models.Model):
     def __str__(self):
         return self.student_name
     
-
-    def update_student_class(self):
-        today = timezone.now().date()
-        if today.month == 4 and today.day == 24:
-            current_class = int(self.student_class.split()[0])
-            new_class = current_class + 1
-            self.student_class = f"{new_class}th class"
-            self.save()
 
     # def age(self):
     #     today = date.today()

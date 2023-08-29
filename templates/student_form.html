@@ -2,7 +2,7 @@
 
 {% block content %}
   <h1>Enter Student Details</h1>
-  <form method="POST" style="max-width: 500px; margin: 0 auto;">
+  <form method="POST" enctype="multipart/form-data" style="max-width: 500px; margin: 0 auto;">
     {% csrf_token %}
     {{ form.as_p }}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
