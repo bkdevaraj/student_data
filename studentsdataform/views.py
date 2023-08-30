@@ -105,13 +105,25 @@ def student_list(request):
         #     pass
 
     return render(request, 'studentdatabase.html', {'students': students, 'search_query': search_query})
+from django.core.files.storage import default_storage
+from django.db.models.signals import pre_delete
+from django.dispatch import receiver
 
+
+@receiver(pre_delete, sender=Student)
+def delete_student_image(sender, instance, **kwargs):
+    if instance.image:
+        if default_storage.exists(instance.image.name):
+            default_storage.delete(instance.image.name)
 
 def delete_students(request):
     if request.method == 'POST':
         student_ids = request.POST.getlist('student_ids')
         if student_ids:
-            Student.objects.filter(id__in=student_ids).delete()
+            for student_id in student_ids:
+                student = Student.objects.get(id=student_id)
+                delete_student_image(sender=Student, instance=student)
+                student.delete()
             
     return redirect('studentsdataform:student_list')
 
