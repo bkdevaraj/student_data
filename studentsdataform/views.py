@@ -39,18 +39,30 @@ from django.contrib import messages
 def home(request):
     return render(request,'home.html')
 # ADD STUDENT PAGE AND SAVING THE DATA TO MODEL
+from django.utils.datastructures import MultiValueDictKeyError
+
 def add_student(request):
     if request.method == 'POST':
-        form = StudentForm(request.POST,request.FILES)
+        try:
+            image = request.FILES['image']
+        except MultiValueDictKeyError:
+            image = None
+
+        form = StudentForm(request.POST, request.FILES)
+        
         if form.is_valid():
-            student=form.save(commit=False)
-            student.image = request.FILES['image']
+            student = form.save(commit=False)
+            
+            if image is not None:
+                student.image = image
+            
             student.save() 
             return redirect('studentsdataform:student_list')
-            # return redirect('success')
     else:
         form = StudentForm()
+        
     return render(request, 'student_form.html', {'form': form})
+
 
 # def studentdatabase(request):
 #     students = Student.objects.all()

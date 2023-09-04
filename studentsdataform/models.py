@@ -52,6 +52,7 @@ class Student(models.Model):
          upload_to=student_image_path,
         blank=True,
         null=True,
+        default='no_image.jpg',
         validators=[
             
             validate_image_extension,
