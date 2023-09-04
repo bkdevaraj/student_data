@@ -45,8 +45,9 @@ class Student(models.Model):
     mother_aadhar = models.CharField(max_length=150)
     mobile_number = models.CharField(max_length=150)
     dob = models.DateField(null=True, blank=True)
-    age = models.IntegerField(null=True, blank=True)
+    age = models.IntegerField(null=True, blank=True,help_text="Do not Enter Age Field as its caluculated automatically")
     address=models.CharField(max_length=500, default='Unknown')
+    remarks = models.CharField(max_length=500, blank=True, null=True, help_text="Add remarks about the student")
     image = models.ImageField(
          upload_to=student_image_path,
         blank=True,
@@ -57,6 +58,7 @@ class Student(models.Model):
             validate_image_size
            
         ]
+    
     )
    
     # def save(self, *args, **kwargs):

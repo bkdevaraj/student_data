@@ -18,6 +18,7 @@ class StudentForm(forms.ModelForm):
                        'dob',
                        'age',
                        'address',
-                       'image'
+                       'image',
+                       'remarks'
                        ]
     
