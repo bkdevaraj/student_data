@@ -124,7 +124,7 @@ from django.dispatch import receiver
 
 @receiver(pre_delete, sender=Student)
 def delete_student_image(sender, instance, **kwargs):
-    if instance.image:
+    if instance.image and not instance.image.name.endswith('no_image.jpg'):
         if default_storage.exists(instance.image.name):
             default_storage.delete(instance.image.name)
 
