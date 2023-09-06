@@ -4,7 +4,7 @@
 
   <div class="container mt-5">
     <h1 class="text-center mb-5">Modify Student Information</h1>
-    <form method="POST" enctype="multipart/form-data" class="card p-5">
+    <form method="POST" class="card p-5">
       {% csrf_token %}
       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
@@ -82,17 +82,8 @@
         margin-top: 20px;
       }
     </style>
-
       <input type="hidden" name="student_id" value="{{ student.id }}">
       
-      <div class="mb-3">
-    <label for="image" class="form-label">Student Image:</label>
-    <input type="file" id="image" name="image" accept="image/*">
-    {% if student.image %}
-        <img src="{{ student.image.url }}" alt="Student Image" style="width: 150px; height: 150px;">
-    {% endif %}
-    </div>
-
       <div class="mb-3">
         <label for="student_name" class="form-label">Student Name:</label>
         <input type="text" id="student_name" name="student_name" value="{{ student.student_name }}" class="form-control">

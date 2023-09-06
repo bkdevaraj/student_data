@@ -124,7 +124,7 @@ from django.dispatch import receiver
 
 @receiver(pre_delete, sender=Student)
 def delete_student_image(sender, instance, **kwargs):
-    if instance.image and not instance.image.name.endswith('no_image.jpg'):
+    if instance.image and not instance.image.name.endswith('no_image.png'):
         if default_storage.exists(instance.image.name):
             default_storage.delete(instance.image.name)
 
@@ -146,18 +146,12 @@ def delete_students(request):
 def modify_student(request, student_id):
     # Get the student object by id, or return a 404 error if not found
     student = get_object_or_404(Student, id=student_id)
-    new_image = request.FILES.get('image')
+
     # If the request method is POST, process the form data
     if request.method == 'POST':
-        form = StudentForm(request.POST,request.FILES, instance=student)
+        form = StudentForm(request.POST, instance=student)
         if form.is_valid():
-            student = form.save(commit=False)
-            student.image = request.FILES['image']
-            student.save()
             form.save()
-            
-
-            
             return redirect('studentsdataform:student_list')
     else:
         form = StudentForm(instance=student)
