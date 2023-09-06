@@ -14,7 +14,7 @@ class StudentForm(forms.ModelForm):
     mobile_number = forms.CharField(max_length=150)
     address = forms.CharField(max_length=500, initial='Unknown')
     image = forms.ImageField(required=False)
-    remarks = forms.CharField(widget=forms.Textarea)
+    remarks = forms.CharField(widget=forms.Textarea, required=False)
 
     class Meta:
         model = Student
