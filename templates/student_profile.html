@@ -22,7 +22,11 @@
   <div class="profile-details">
     <h1 class="profile-title">Student Profile</h1>
     <h3 class="profile-name" style="font-weight: bold; color: #007BFF;">{{ student.student_name }}</h3>
+    <div class="profile-image">
+      <img src="{{ student.image.url }}" alt="Student Image" style="width: 150px; height: 150px;">
+    </div>
     <div class="info-section">
+      
       <p style="font-weight: bold; color: #ac16b9;"> Father's Name: <span style="font-weight: bold; color: #23B916;">{{ student.father_name }}</span></p>
       <p style="font-weight: bold; color: #ac16b9;"> Mother's Name:<span style="font-weight: bold; color: #23B916;">  {{ student.mother_name }}</span> </p>
       <p style="font-weight: bold; color: #ac16b9;"> Student Class: <span style="font-weight: bold; color: #23B916;"> {{ student.student_class }}</span> </p>

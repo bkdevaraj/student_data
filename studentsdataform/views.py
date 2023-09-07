@@ -145,6 +145,8 @@ def delete_students(request):
 
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
+from django.core.exceptions import ValidationError
+from django.http import HttpResponseBadRequest
 
 def modify_student(request, student_id):
     # Get the student object by id, or return a 404 error if not found
@@ -156,6 +158,11 @@ def modify_student(request, student_id):
         if form.is_valid():
             if 'image' in request.FILES:
                 new_image = request.FILES['image']
+                if new_image.size > 150 * 1024:
+                     form.add_error('image', "Image size should be less than 150KB.")
+                allowed_types = ['image/jpeg', 'image/jpg', 'image/png']
+                if new_image.content_type not in allowed_types:
+                     form.add_error('image', "Invalid image type. Only jpg, jpeg, and png are allowed.")
                 if student.image:
                     # Delete the old image using default_storage
                     default_storage.delete(student.image.name)
@@ -165,6 +172,7 @@ def modify_student(request, student_id):
             student = form.save()  # Save the form with or without the image
 
             return redirect('studentsdataform:student_list')
+        
     else:
         form = StudentForm(instance=student)
 

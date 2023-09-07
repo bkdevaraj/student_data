@@ -88,9 +88,9 @@
         <input type="file" id="image" name="image" accept="image/*">
         {% if student.image %}
             <img src="{{ student.image.url }}" alt="Student Image" style="width: 150px; height: 150px;">
-        {% else %}
-            <p>No image available</p>
         {% endif %}
+        {{ form.image.errors }}
+        
     </div>
     
       <div class="mb-3">
