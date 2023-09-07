@@ -143,15 +143,27 @@ def delete_students(request):
 
 
 
+from django.core.files.storage import default_storage
+from django.core.files.base import ContentFile
+
 def modify_student(request, student_id):
     # Get the student object by id, or return a 404 error if not found
     student = get_object_or_404(Student, id=student_id)
 
     # If the request method is POST, process the form data
     if request.method == 'POST':
-        form = StudentForm(request.POST, instance=student)
+        form = StudentForm(request.POST, request.FILES, instance=student)
         if form.is_valid():
-            form.save()
+            if 'image' in request.FILES:
+                new_image = request.FILES['image']
+                if student.image:
+                    # Delete the old image using default_storage
+                    default_storage.delete(student.image.name)
+                # Save the new image using default_storage
+                student.image.save(new_image.name, new_image)
+
+            student = form.save()  # Save the form with or without the image
+
             return redirect('studentsdataform:student_list')
     else:
         form = StudentForm(instance=student)
