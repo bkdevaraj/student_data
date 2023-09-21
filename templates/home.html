@@ -46,11 +46,22 @@
 
   <div class="button-container">
     <a href="{% url 'studentsdataform:add_student' %}">
-      <button class="action-button">Add Another Student</button>
+      <button class="action-button">Add Student</button>
     </a>
   
     <a href="{% url 'studentsdataform:student_list' %}">
-      <button class="action-button">Student Database</button>
+      <button class="action-button">Student List</button>
+    </a>
+    </div>
+    <h1 class="page-title">Parent Database</h1>
+    <div class="button-container">
+    
+    <a href="{% url 'parentsdataform:add_parent' %}">
+      <button class="action-button">Add Parent</button>
+    </a>
+  
+    <a href="{% url 'parentsdataform:parent_list' %}">
+      <button class="action-button">Parent List</button>
     </a>
   </div>
 

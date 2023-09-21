@@ -1,40 +1,41 @@
 {% extends 'base.html' %}
-{% load students_custom_filters %}
-{% load students_custom_tags %}
-{% pagination students %}
+{% load parents_custom_filters %}
+{% load parents_custom_tags %}
+{% pagination parents %}
 
 {% block content %}
   <div class="table-container">
-    <h1>Students List</h1>
+    <h1>Parents List</h1>
     <div style="margin: 20px;">
-      <form method="GET" action="{% url 'studentsdataform:student_list' %}" style="display: flex; margin-bottom: 10px;">
+      <form method="GET" action="{% url 'parentsdataform:parent_list' %}" style="display: flex; margin-bottom: 10px;">
         <input type="text" name="search_box" placeholder="Search..." style="flex: 1; padding: 8px; font-size: 16px;">
         <button type="submit" style="background-color: #4CAF50; color: white; padding: 8px 16px; font-size: 16px; border: none;">Search</button>
       </form>
 
-      {% if students %}
-        <form method="POST" action="{% url 'studentsdataform:delete_students' %}" style="margin-bottom: 20px;">
+      {% if parents %}
+        <form method="POST" action="{% url 'parentsdataform:delete_parents' %}" style="margin-bottom: 20px;">
           {% csrf_token %}
-          <table class="students-table">
+          <table class="parents-table">
             <thead>
               <tr>
                 <th>Select</th>
-                <th>Student Image</th>
-                <th>Student Name</th>
-                <th>Father Name</th>
-                <th>Mother Name</th>
-                <th>Student Class</th>
+                <th> Image</th>
+                <th>First Name</th>
+                <th>Middle Name</th>
+                <th>Last Name</th>
+                <th>Occupation</th>
                 <th>Date of Birth</th>
                 <th>
-                  <a href="{% url 'studentsdataform:student_list_by_age' %}" style="text-decoration: none; color: white;">
+                  <a href="{% url 'parentsdataform:parent_list_by_age' %}" style="text-decoration: none; color: white;">
                     Age
                     <span>&#x1F50D;</span>
                   </a>
                 </th>
-                <th>School Name</th>
-                <th>Student Aadhar Number</th>
-                <th>Father Aadhar Number</th>
-                <th>Mother Aadhar Number</th>
+                <th>Aadhar Number</th>
+                <th>PAN</th>
+                <th>Has Disiabilty</th>
+                <th>Pension eligible</th>
+                <th>Pension Amount</th>
                 <th>Mobile Number</th>
                 <th>Address</th>
                 <th>Remarks</th>
@@ -42,38 +43,36 @@
               </tr>
             </thead>
             <tbody>
-              {% for student in students %}
+              {% for parent in parents %}
                 <tr>
-                  <td><input type="checkbox" name="student_ids" value="{{ student.id }}"></td>
-                  {% if student.image %}
+                  <td><input type="checkbox" name="parent_ids" value="{{ parent.id }}"></td>
+                  {% if parent.image %}
                     <td>
-                        <img src="{{ student.image.url }}" alt="Student Image" style="width: 2in; height: 2.5in;">
+                        <img src="{{ parent.image.url }}" alt="Parent Image" style="width: 2in; height: 2.5in;">
                     </td>
                   {% else %}
                     <td>No Image Available</td>
                   {% endif %}
-
-                
                   <td>
-                    <a href="{% url 'studentsdataform:student_profile' student.id %}">
-                      {{ student.student_name }}
+                    <a href="{% url 'parentsdataform:parent_profile' parent.id %}">
+                      {{ parent.first_name  }}
                     </a>
                   </td>
-                  
-                  <td>{{ student.father_name }}</td>
-                  <td>{{ student.mother_name }}</td>
-                  <td>{{ student.student_class }}</td>
-                  <td>{{ student.dob }}</td>
-                  <td>{{ student.dob|calculate_age }}</td>
-                  <td>{{ student.school_name }}</td>
-                  <td>{{ student.student_aadhar }}</td>
-                  <td>{{ student.father_aadhar }}</td>
-                  <td>{{ student.mother_aadhar }}</td>
-                  <td>{{ student.mobile_number }}</td>
-                  <td>{{ student.address }}</td>
-                  <td>{{ student.remarks }}</td>
+                  <td>{{ parent.middle_name  }}</td>
+                  <td>{{ parent.last_name  }}</td>
+                  <td>{{ parent.occupation  }}</td>
+                  <td>{{ parent.dob }}</td>
+                  <td>{{ parent.dob|calculate_age }}</td>
+                  <td>{{ parent.aadhar_number  }}</td>
+                  <td>{{ parent.pan_number  }}</td>
+                  <td>{{ parent.has_disability  }}</td>
+                  <td>{{ parent.pension_eligible   }}</td>
+                  <td>{{ parent.pension_amount    }}</td>
+                  <td>{{ parent.mobile_number }}</td>
+                  <td>{{ parent.address }}</td>
+                  <td>{{ parent.remarks }}</td>
                   <td>
-                    <a href="{% url 'studentsdataform:modify_student' student.id %}" style="text-decoration: none; color: #04AA6D;">
+                    <a href="{% url 'parentsdataform:modify_parent' parent.id %}" style="text-decoration: none; color: #04AA6D;">
                       Edit
                       <span>&#x270E;</span>
                     </a>
@@ -84,30 +83,31 @@
           </table>
 
           <button type="submit" class="delete-button">Delete Selected</button>
+          
           <button class="add-student-button">
-            <a href="{% url 'studentsdataform:add_student' %}" style="text-decoration: none; color: white;">Add Another Student</a>
+            <a href="{% url 'parentsdataform:add_parent' %}" style="text-decoration: none; color: white;">Add Another Parent</a>
           </button>
         </form>
 
         <div class="pagination">
-          {% if students.has_previous %}
-            <a href="?{% query_transform page=students.previous_page_number %}" class="pagination-link">Previous</a>
+          {% if parents.has_previous %}
+            <a href="?{% query_transform page=parents.previous_page_number %}" class="pagination-link">Previous</a>
           {% endif %}
 
-          {% for page in students.paginator.page_range %}
-            {% if students.number == page %}
+          {% for page in parents.paginator.page_range %}
+            {% if parents.number == page %}
               <a href="?{% query_transform page=page %}" class="pagination-link active">{{ page }}</a>
             {% else %}
               <a href="?{% query_transform page=page %}" class="pagination-link">{{ page }}</a>
             {% endif %}
           {% endfor %}
 
-          {% if students.has_next %}
+          {% if parents.has_next %}
             <a href="?{% query_transform page=students.next_page_number %}" class="pagination-link">Next</a>
           {% endif %}
         </div>
       {% else %}
-        <p>No students found.</p>
+        <p>No Parents found.</p>
       {% endif %}
     </div>
   </div>

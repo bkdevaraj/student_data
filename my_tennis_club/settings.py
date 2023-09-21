@@ -54,10 +54,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'studentsdataform',
     'login_app',
-    'studentsdataform.templatetags.custom_filters',
-    'studentsdataform.templatetags.custom_tags',
+    'studentsdataform.templatetags.students_custom_filters',
+    'studentsdataform.templatetags.students_custom_tags',
     'apscheduler',
-
+    'parentsdataform',
+    'parentsdataform.templatetags.parents_custom_filters',
+    'parentsdataform.templatetags.parents_custom_tags',
+    
 ]
 LOGIN_REDIRECT_URL = 'studentsdataform:home'
 MIDDLEWARE = [
@@ -122,6 +125,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
+    
 ]
 STATIC_ROOT=os.path.join(BASE_DIR,'assets')
 

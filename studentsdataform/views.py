@@ -4,7 +4,7 @@ from django.contrib import messages
 from .models import Student
 from .forms import StudentForm
 from django.db.models import Q
-from .templatetags import custom_filters
+from .templatetags import students_custom_filters
 import datetime
 
 from django.contrib import messages

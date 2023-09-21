@@ -34,15 +34,16 @@ def validate_image_size(value):
         raise ValidationError(f"The maximum file size allowed is {max_size/1024:.2f} KB.")
 
         
-class Student(models.Model):
-    student_name = models.CharField(max_length=150)
-    father_name = models.CharField(max_length=150)
-    mother_name = models.CharField(max_length=150)
-    student_class = models.CharField(max_length=150)
-    school_name = models.CharField(max_length=150)
-    student_aadhar = models.CharField(max_length=150)
-    father_aadhar = models.CharField(max_length=150)
-    mother_aadhar = models.CharField(max_length=150)
+class Parent(models.Model):
+    first_name = models.CharField(max_length=150)
+    middle_name = models.CharField(max_length=150)
+    last_name = models.CharField(max_length=150)
+    occupation = models.CharField(max_length=150)
+    aadhar_number = models.CharField(max_length=150)
+    pan_number = models.CharField(max_length=150)
+    has_disability = models.BooleanField(default=False)
+    pension_eligible = models.BooleanField(default=False)
+    pension_amount = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     mobile_number = models.CharField(max_length=150)
     dob = models.DateField(null=True, blank=True)
     age = models.IntegerField(null=True, blank=True,help_text="Do not Enter Age Field as its caluculated automatically")
@@ -76,16 +77,4 @@ class Student(models.Model):
         return self.student_name
     
     
-
-    # def age(self):
-    #     today = date.today()
-    #     age = today.year - self.dob.year - ((today.month, today.day) < (self.dob.month, self.dob.day))
-    #     return age
-    # def age(self):
-    #     if self.dob:
-    #         today = date.today()
-    #         age = today.year - self.dob.year - ((today.month, today.day) < (self.dob.month, self.dob.day))
-    #         return age
-    #     else:
-    #         return None
-    
+# Create your models here.

@@ -1,0 +1,170 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <div class="container mt-5">
+    <h1 class="text-center mb-5">Modify Parent Information</h1>
+    <form method="POST" enctype="multipart/form-data" class="card p-5">
+      {% csrf_token %}
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/smoothness/jquery-ui.css">
+    <script>
+      $(function() {
+        $("#id_dob").datepicker({dateFormat: 'yy-mm-dd',changeMonth: true,changeYear: true,yearRange: '-100:+10',maxDate: new Date()});
+        
+      });
+    </script>
+    <style>
+      /* style for form label */
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        font-size: 16px;
+        color: #62529c;
+      }
+
+      /* style for form input */
+      input[type=text], input[type=number], input[type=date] {
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        margin-bottom: 20px;
+        font-size: 16px;
+        color: #62529c;
+      }
+
+      /* style for submit button */
+      input[type=submit] {
+        background-color: #62529c;
+        border: none;
+        color: #fff;
+        padding: 15px 30px;
+        text-decoration: none;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 5px;
+      }
+
+      /* style for buttons */
+      .button {
+        background-color: #8b4caf;
+        color: #fff;
+        font-size: 12px;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 5px;
+        margin-left: 10px;
+        margin-right: 10px;
+        cursor: pointer;
+      }
+
+      .button a {
+        text-decoration: none;
+        color: #fff;
+      }
+
+      /* style for form error messages */
+      .errorlist {
+        color: #f00;
+        font-weight: bold;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      /* style for success message */
+      .success-message {
+        color: #00f;
+        font-weight: bold;
+        margin-top: 20px;
+      }
+    </style>
+      <input type="hidden" name="parent_id" value="{{ parent.id }}">
+      <div class="mb-3">
+        <label for="image" class="form-label">parent Image:</label>
+        <input type="file" id="image" name="image" accept="image/*">
+        {% if parent.image %}
+            <img src="{{ parent.image.url }}" alt="parent Image" style="width: 150px; height: 150px;">
+        {% endif %}
+        {{ form.image.errors }}
+        
+    </div>
+    
+      <div class="mb-3">
+        <label for="first_name " class="form-label">First Name:</label>
+        <input type="text" id="first_name " name="first_name " value="{{ parent.first_name  }}" class="form-control">
+      </div>
+    
+      <div class="mb-3">
+        <label for="middle_name " class="form-label">middle_name :</label>
+        <input type="text" id="middle_name " name="middle_name " value="{{ parent.middle_name  }}" class="form-control">
+      </div>
+    
+      <div class="mb-3">
+        <label for="last_name " class="form-label">last_name :</label>
+        <input type="text" id="last_name " name="last_name " value="{{ parent.last_name  }}" class="form-control">
+      </div>
+    
+      <div class="mb-3">
+        <label for="occupation " class="form-label">occupation :</label>
+        <input type="text" id="occupation " name="occupation " value="{{ parent.occupation  }}" class="form-control">
+      </div>
+    
+      <div class="mb-3">
+        <label for="dob" class="form-label">Date of Birth:</label>
+        <input type="date" id="dob" name="dob" value="{{ parent.dob|date:'Y-m-d' }}" class="form-control">
+      </div>
+    
+      
+    
+      <div class="mb-3">
+        <label for="aadhar_number " class="form-label"> Aadhar Number:</label>
+        <input type="text" id="aadhar_number " name="aadhar_number " value="{{ parent.aadhar_number  }}" class="form-control">
+      </div>
+    
+      <div class="mb-3">
+        <label for="pan_number " class="form-label">pan_number :</label>
+        <input type="text" id="pan_number " name="pan_number " value="{{ parent.pan_number  }}" class="form-control">
+      </div>
+    
+      <div class="mb-3">
+        <label for="has_disability" class="form-label">Has Disability:</label>
+        <div class="toggle-button">
+            <input type="checkbox" id="has_disability" name="has_disability" {% if parent.has_disability %}checked{% endif %} class="tgl tgl-light">
+            <label class="tgl-btn" for="has_disability"></label>
+      </div>
+    
+    
+
+      
+      
+        <label for="pension_eligible" class="form-label">Pension Eligible :</label>
+        <div class="toggle-button">
+            <input type="checkbox" id="pension_eligible" name="pension_eligible" {% if parent.pension_eligible %}checked{% endif %} class="tgl tgl-light">
+            <label class="tgl-btn" for="pension_eligible"></label>
+        </div>
+        <div class="mb-3">
+          <label for="pension_amount   " class="form-label">pension_amount   :</label>
+          <input type="text" id="pension_amount   " name="pension_amount   "  value="{{ parent.pension_amount    }}" class="form-control">
+        </div>
+      <div class="mb-3">
+        <label for="mobile_number" class="form-label">Mobile Number:</label>
+        <input type="text" id="mobile_number"  name="mobile_number" value="{{ parent.mobile_number  }}" class="form-control">
+      </div>
+      <div class="mb-3">
+        <label for="address" class="form-label">address:</label>
+        <input type="text" id="address"  name="address" value="{{ parent.address  }}" class="form-control">
+      </div>
+      <div class="mb-3">
+        <label for="remarks" class="form-label">Remarks:</label>
+        <input type="text" id="remarks"  name="remarks" value="{{ parent.remarks  }}" class="form-control">
+      </div>
+      <div class="d-grid gap-2">
+        <button type="submit" class="btn btn-primary btn-lg mt-3">Submit</button>
+        <a href="{% url 'parentsdataform:parent_list' %}" style="text-decoration: none; color: white; background-color: #4CAF50; padding: 4px 8px; font-size: 20px; margin-left: 6px;">Cancel</a>
+      </div>
+    </form>
+  {% endblock %}

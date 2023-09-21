@@ -22,6 +22,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('login_app.urls',namespace='login_app')),
     path('',include('studentsdataform.urls',namespace='studentsdataform')),
+    path('',include('parentsdataform.urls',namespace='parentsdataform')),
+    
     
     
     # path('polls/', include('data_acq.urls'))
