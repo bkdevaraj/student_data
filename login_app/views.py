@@ -4,12 +4,12 @@ from django.contrib.auth import authenticate, login, logout
 def login_view(request):
     if request.method == 'POST':
         username = request.POST['username']
-        password = request.POST['password']
+        password = request.POST['pass']
         user = authenticate(request, username=username, password=password)
         print(user)
         if user is not None:
             login(request, user)
-            print('i under login page')
+           
             return redirect('studentsdataform:home')  # Redirect to the homepage of students_app
         else:
             return render(request, 'login.html', {'error': 'Invalid credentials'})

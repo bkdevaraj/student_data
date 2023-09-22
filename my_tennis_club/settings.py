@@ -123,12 +123,17 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+]
+AUTH_USER_MODEL = 'auth.User'
+
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'login_app/static'),
     
 ]
 STATIC_ROOT=os.path.join(BASE_DIR,'assets')
-
+STATIC_URL = '/static/'
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
