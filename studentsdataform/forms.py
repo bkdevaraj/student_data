@@ -18,4 +18,4 @@ class StudentForm(forms.ModelForm):
 
     class Meta:
         model = Student
-        fields = ['student_name', 'father_name', 'mother_name', 'student_class', 'school_name', 'student_aadhar', 'father_aadhar', 'mother_aadhar', 'mobile_number', 'dob', 'age', 'address', 'image', 'remarks']
+        fields = ['student_name', 'father_name', 'mother_name', 'student_class', 'school_name', 'student_aadhar', 'father_aadhar', 'mother_aadhar', 'mobile_number', 'dob', 'address', 'image', 'remarks']
