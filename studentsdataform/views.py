@@ -6,7 +6,7 @@ from .forms import StudentForm
 from django.db.models import Q
 from .templatetags import students_custom_filters
 import datetime
-
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 # def studentdata(request):
 #     if request.method == 'POST':
@@ -40,7 +40,7 @@ def home(request):
     return render(request,'home.html')
 # ADD STUDENT PAGE AND SAVING THE DATA TO MODEL
 from django.utils.datastructures import MultiValueDictKeyError
-
+@login_required
 def add_student(request):
     if request.method == 'POST':
         try:
