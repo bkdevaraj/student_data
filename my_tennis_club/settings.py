@@ -63,6 +63,8 @@ INSTALLED_APPS = [
     
 ]
 LOGIN_REDIRECT_URL = 'studentsdataform:home'
+LOGIN_URL = 'login_app:login_view'  # Replace 'login' with the actual login URL name
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
