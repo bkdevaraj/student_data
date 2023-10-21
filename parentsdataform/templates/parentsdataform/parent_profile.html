@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 {% load parents_custom_filters %}
+{% load static %}
 
 <head>
     <meta charset="UTF-8">
@@ -94,7 +95,13 @@
                             <div class="col-lg-4">
                                 <div class="card shadow-sm">
                                     <div class="card-header bg-transparent text-center">
-                                        <img class="profile_img" src="{{ parent.image.url }}" alt="parent Image">
+                                        {% if parent.image %}
+                                            <img class="profile_img" src="{{ parent.image.url }}" alt="parent Image">
+                                        {% else %}
+                                            <p>No Image Available</p>
+                                        {% endif %}
+                                        
+                                        
                                         <h3 class="profile-name" style="font-weight: bold; color: #007BFF; text-transform: uppercase; font-size: 30px;">
                                           {{ parent.first_name  }}
                                       </h3>

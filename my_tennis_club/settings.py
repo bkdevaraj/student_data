@@ -132,6 +132,7 @@ AUTH_USER_MODEL = 'auth.User'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'login_app/static'),
+    os.path.join(BASE_DIR, 'studentsdataform/static'),
     
 ]
 STATIC_ROOT=os.path.join(BASE_DIR,'assets')

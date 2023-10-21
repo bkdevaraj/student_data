@@ -1,9 +1,11 @@
+
 {% extends 'base.html' %}
 {% load students_custom_filters %}
 {% load students_custom_tags %}
 {% pagination students %}
 
 {% block content %}
+
   <div class="table-container">
     <h1>Students List</h1>
     <div style="margin: 20px;">
@@ -20,7 +22,13 @@
               <tr>
                 <th>Select</th>
                 <th>Student Image</th>
-                <th>Student Name</th>
+                <th>
+                  <a href="{% url 'studentsdataform:student_list_by_name' %}" style="text-decoration: none; color: white;">
+                    Student Name
+                    <span>↓</span>
+                  </a>
+                </th>
+                
                 <th>Father Name</th>
                 <th>Mother Name</th>
                 <th>Student Class</th>
@@ -111,6 +119,7 @@
       {% endif %}
     </div>
   </div>
+
 
   <style>
     /* Responsive Styles */

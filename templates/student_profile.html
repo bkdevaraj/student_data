@@ -94,7 +94,12 @@
                             <div class="col-lg-4">
                                 <div class="card shadow-sm">
                                     <div class="card-header bg-transparent text-center">
-                                        <img class="profile_img" src="{{ student.image.url }}" alt="Student Image">
+                                        {% if student.image %}
+                                            <img class="profile_img" src="{{ student.image.url }}" alt="Student Image">
+                                        {% else %}
+                                            <p>No Image Available</p>
+                                        {% endif %}
+                                        
                                         <h3 class="profile-name" style="font-weight: bold; color: #007BFF; text-transform: uppercase; font-size: 30px;">
                                           {{ student.student_name }}
                                       </h3>

@@ -80,7 +80,7 @@ def logout_view(request):
 
 
 
-
+@login_required
 def student_list(request):
     students = Student.objects.all()
 
@@ -127,7 +127,7 @@ def delete_student_image(sender, instance, **kwargs):
     if instance.image and not instance.image.name.endswith('no_image.png'):
         if default_storage.exists(instance.image.name):
             default_storage.delete(instance.image.name)
-
+@login_required
 def delete_students(request):
     if request.method == 'POST':
         student_ids = request.POST.getlist('student_ids')
@@ -147,7 +147,7 @@ from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
 from django.core.exceptions import ValidationError
 from django.http import HttpResponseBadRequest
-
+@login_required
 def modify_student(request, student_id):
     # Get the student object by id, or return a 404 error if not found
     student = get_object_or_404(Student, id=student_id)
@@ -181,7 +181,7 @@ def modify_student(request, student_id):
     return render(request, 'modify_student.html', context)
 
 
-
+@login_required
 def student_list_by_age(request):
     students = Student.objects.all()
 
@@ -192,6 +192,21 @@ def student_list_by_age(request):
     students = students.order_by('dob')
 
     return render(request, 'studentdatabase.html', {'students': students})
+
+
+@login_required
+def student_list_by_name(request):
+    students = Student.objects.all()
+
+    # filter based on age
+    # students = students.filter(dob__lte=timezone.now() - relativedelta(years=18))
+
+    # sort by age in descending order
+    students = students.order_by('student_name')
+
+    return render(request, 'studentdatabase.html', {'students': students})
+
+
 # for i in range(0,50):
 
 #     VAL1=Student.objects.filter(id=i)
@@ -269,7 +284,7 @@ def student_list_by_age(request):
 
 from django.shortcuts import render, get_object_or_404
 from .models import Student  # You might need to adjust this import based on your project structure
-
+@login_required
 def student_profile_view(request, student_id):
     student = get_object_or_404(Student, id=student_id)
     prev_student = Student.objects.filter(id__lt=student_id).last()  # Get the previous student
@@ -277,6 +292,7 @@ def student_profile_view(request, student_id):
     return render(request, 'student_profile.html', {'student': student,'prev_student': prev_student, 'next_student': next_student})
 
 from django.http import HttpResponse
+@login_required
 def next_student_profile(request, student_id):
     next_student = Student.objects.filter(id__gt=student_id).order_by('id').first()
     if next_student:

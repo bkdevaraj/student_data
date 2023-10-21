@@ -3,8 +3,10 @@ from django.shortcuts import render,redirect,get_object_or_404
 from django.utils.datastructures import MultiValueDictKeyError
 from .models import Parent
 from .forms import ParentForm
+from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 # Create your views here.
+@login_required
 def add_parent(request):
     if request.method == 'POST':
         try:
@@ -27,7 +29,7 @@ def add_parent(request):
         
     return render(request, 'parentsdataform/parents_form.html', {'form': form})
 
-
+@login_required
 def parent_list(request):
     parents = Parent.objects.all()
 
@@ -77,7 +79,7 @@ def delete_parent_image(sender, instance, **kwargs):
     if instance.image and not instance.image.name.endswith('no_image.png'):
         if default_storage.exists(instance.image.name):
             default_storage.delete(instance.image.name)
-
+@login_required
 def delete_parents(request):
     if request.method == 'POST':
         parent_ids = request.POST.getlist('parent_ids')
@@ -97,7 +99,7 @@ from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
 from django.core.exceptions import ValidationError
 from django.http import HttpResponseBadRequest
-
+@login_required
 def modify_parent(request, parent_id):
     # Get the parent object by id, or return a 404 error if not found
     parent = get_object_or_404(Parent, id=parent_id)
@@ -131,7 +133,7 @@ def modify_parent(request, parent_id):
     return render(request, 'parentsdataform/modify_parent.html', context)
 
 
-
+@login_required
 def parent_list_by_age(request):
     parents = Parent.objects.all()
 
@@ -219,7 +221,7 @@ def parent_list_by_age(request):
 
 from django.shortcuts import render, get_object_or_404
 from .models import Parent  # You might need to adjust this import based on your project structure
-
+@login_required
 def parent_profile_view(request, parent_id):
     parent = get_object_or_404(Parent, id=parent_id)
     prev_parent = Parent.objects.filter(id__lt=parent_id).last()  # Get the previous parent
@@ -227,6 +229,7 @@ def parent_profile_view(request, parent_id):
     return render(request, 'parentsdataform/parent_profile.html', {'parent': parent,'prev_parent': prev_parent, 'next_parent': next_parent})
 
 from django.http import HttpResponse
+@login_required
 def next_parent_profile(request, parent_id):
     next_parent = Parent.objects.filter(id__gt=parent_id).order_by('id').first()
     if next_parent:
